@@ -18,4 +18,8 @@ public:
 
     Q_INVOKABLE String ReadTXT(String path, int line=-1);
     Q_INVOKABLE void WriteTXT(String path,String text);
+    Q_INVOKABLE void WriteINI(String path,String section,String var,String value);
+    Q_INVOKABLE String ReadINI(String path,String section,String var);
+    Q_INVOKABLE String GetPath(String str);
 };
+extern Lib *aLib;

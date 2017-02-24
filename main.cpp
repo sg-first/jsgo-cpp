@@ -8,12 +8,14 @@ void registerType()
     RegisterJSType(Lib*,"Lib");
 }
 
+Lib *aLib;
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     registerType();
-    Lib *aLib=new Lib;
+    aLib=new Lib;
     JS myjs(aLib);
-    String mistake;
-    myjs.JSEval("lib.WriteTXT(\"D:/123.txt\",\"hello world!\")",NULL_String,&mistake);
+
+    myjs.JSEval("lib.WriteTXT(\"D:/123.txt\",\"hello world!\")",NULL_String);
 }

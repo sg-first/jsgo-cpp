@@ -22,3 +22,24 @@ void Lib::WriteTXT(String path, String text)
    out<<text;
    PreQFile->close();
 }
+
+void Lib::WriteINI(String path, String section, String var, String value)
+{
+   QSettings *PreQSet=new QSettings(path,QSettings::IniFormat);
+   PreQSet->setValue("/"+section+"/"+var,value);
+}
+
+String Lib::ReadINI(String path, String section, String var)
+{
+    QSettings *PreQSet=new QSettings(path,QSettings::IniFormat);
+    return PreQSet->value("/"+section+"/"+var).toString();
+}
+
+String Lib::GetPath(String str)
+{
+   String path;
+   QDir dir;
+   path=dir.currentPath();
+   path+="/"+str;
+   return path;
+}

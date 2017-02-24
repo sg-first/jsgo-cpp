@@ -33,14 +33,10 @@ public:
     JSVM* VM;
     Lib* aLib;
 
-    Q_INVOKABLE Variant JSEval(String code,String functionname=NULL_String,String *mistake=nullptr);
-    Q_INVOKABLE void JSSendJSPar(JSParStru Parame);
-    Q_INVOKABLE Variant JSEvalFile(String path,String functionname=NULL_String,String *mistake=nullptr);
-    Q_INVOKABLE Variant JSCallFun(String functionname,String *mistake=nullptr);
-    Q_INVOKABLE void DeleteJSVM(JSVM *VM){delete VM;}
+    Variant JSEval(String code,String functionname=NULL_String,String *mistake=nullptr);
+    void JSSendJSPar(JSParStru Parame);
+    Variant JSEvalFile(String path,String functionname=NULL_String,String *mistake=nullptr);
+    Variant JSCallFun(String functionname,String *mistake=nullptr);
+    void DeleteJSVM(JSVM *VM){delete VM;}
 
-    //Q_INVOKABLE void JSSendPar(ParametersStru *Parame,String ParameName);
-    /*Q_INVOKABLE ParametersStru* NewParametersStru() {return new ParametersStru();}
-    Q_INVOKABLE ParametersStru GetParametersStruVal(ParametersStru *par) {return *par;}
-    Q_INVOKABLE void DeleteParametersStru(ParametersStru *par) {delete par;}*/
 };
