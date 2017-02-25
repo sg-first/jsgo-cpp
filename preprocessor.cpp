@@ -1,5 +1,11 @@
 #include "preprocessor.h"
 
+void preprocessor::run(String codepath, JS *VM)
+{
+    String code=preprocessor::PCodeFile(codepath);
+    VM->JSEval(code);
+}
+
 String preprocessor::PCodeFile(String codepath)
 {
     String code=aLib->ReadTXT(codepath);

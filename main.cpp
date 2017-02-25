@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "JS.h"
+#include "preprocessor.h"
 
 void registerType()
 {
@@ -17,5 +17,7 @@ int main(int argc, char *argv[])
     aLib=new Lib;
     JS myjs(aLib);
 
-    myjs.JSEval("lib.WriteTXT(\"D:/123.txt\",\"hello world!\")",NULL_String);
+    String inipath=aLib->GetPath("makefile.ini");
+    String mainpath=aLib->ReadINI(inipath,"project","main");
+    preprocessor::run(mainpath,&myjs);
 }
