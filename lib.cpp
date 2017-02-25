@@ -43,3 +43,11 @@ String Lib::GetPath(String str)
    path+="/"+str;
    return path;
 }
+
+void Lib::output(String context, bool lineFeed)
+{
+    if(lineFeed)
+        cout<<context<<endl;
+    else
+        cout<<context;
+}

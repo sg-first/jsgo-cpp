@@ -1,6 +1,4 @@
 #include "preprocessor.h"
-#include <iostream>
-using namespace std;
 
 String preprocessor::PCodeFile(String codepath)
 {
@@ -25,7 +23,7 @@ String preprocessor::prepro(String str,String &newcode)
         QStringList requireList=str.split("#require ");
         if(requireList[0]!="") //require前面没有任何字符，如果有就拒绝（看看这个分割一样不一样）
         {
-            cout<<"Unrecognized #require statement"<<endl;
+            aLib->output("Unrecognized #require statement");
             return "";
         }
         //没有问题，开始处理被require的代码文本
@@ -37,7 +35,7 @@ String preprocessor::prepro(String str,String &newcode)
         QStringList defineList=str.split("#define ");
         if(defineList[0]!="") //define前面没有任何字符，如果有就拒绝（看看这个分割一样不一样）
         {
-            cout<<"Unrecognized #define statement"<<endl;
+            aLib->output("Unrecognized #define statement");
             return "";
         }
         defineList=defineList[1].split(" ");
