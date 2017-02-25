@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     aLib=new Lib;
     JS myjs(aLib);
 
-    String inipath=aLib->GetPath("makefile.ini");
+    String inipath=aLib->getPath("makefile.ini");
     String mainpath=aLib->ReadINI(inipath,"project","main");
     preprocessor::run(mainpath,&myjs);
 }

@@ -35,7 +35,7 @@ String Lib::ReadINI(String path, String section, String var)
     return PreQSet.value("/"+section+"/"+var).toString();
 }
 
-String Lib::GetPath(String str)
+String Lib::getPath(String str)
 {
    String path;
    QDir dir;
@@ -44,12 +44,12 @@ String Lib::GetPath(String str)
    return path;
 }
 
-void Lib::output(String context, bool lineFeed)
+void Lib::output(String content, bool lineFeed)
 {
     if(lineFeed)
-        cout<<context<<endl;
+        cout<<content<<endl;
     else
-        cout<<context;
+        cout<<content;
 }
 
 void Lib::exitPage()
@@ -58,7 +58,7 @@ void Lib::exitPage()
 String Lib::input(String information)
 {
     output(information);
-    String context;
-    cin>>context;
-    return context;
+    String content;
+    cin>>content;
+    return content;
 }

@@ -33,7 +33,7 @@ String preprocessor::prepro(String str,String &newcode)
             return "";
         }
         //没有问题，开始处理被require的代码文本
-        String path=aLib->GetPath(requireList[1]);
+        String path=aLib->getPath(requireList[1]);
         return preprocessor::PCodeFile(path); //递归解析require的代码文本，直接返回解析后的结果
     }
 

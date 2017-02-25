@@ -22,8 +22,8 @@ public:
     Q_INVOKABLE void WriteTXT(String path,String text);
     Q_INVOKABLE void WriteINI(String path,String section,String var,String value);
     Q_INVOKABLE String ReadINI(String path,String section,String var);
-    Q_INVOKABLE String GetPath(String str);
-    Q_INVOKABLE void output(String context,bool lineFeed=true);
+    Q_INVOKABLE String getPath(String str);
+    Q_INVOKABLE void output(String content,bool lineFeed=true);
     Q_INVOKABLE void exitPage();
     Q_INVOKABLE String input(String information);
 
