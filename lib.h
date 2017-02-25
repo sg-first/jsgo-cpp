@@ -16,7 +16,7 @@ class Lib : public QObject //传递给js用的Lib
     Q_OBJECT
 public:
     Lib(const Lib&):QObject(0){}
-    Lib():cout(stdout,QIODevice::WriteOnly){}
+    Lib():cout(stdout,QIODevice::WriteOnly),cin(stdin,QIODevice::ReadOnly){}
 
     Q_INVOKABLE String ReadTXT(String path, int line=-1);
     Q_INVOKABLE void WriteTXT(String path,String text);
@@ -24,8 +24,11 @@ public:
     Q_INVOKABLE String ReadINI(String path,String section,String var);
     Q_INVOKABLE String GetPath(String str);
     Q_INVOKABLE void output(String context,bool lineFeed=true);
+    Q_INVOKABLE void exitPage();
+    Q_INVOKABLE String input(String information);
 
 private:
     QTextStream cout;
+    QTextStream cin;
 };
 extern Lib *aLib;

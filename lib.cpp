@@ -51,3 +51,14 @@ void Lib::output(String context, bool lineFeed)
     else
         cout<<context;
 }
+
+void Lib::exitPage()
+{exit(0);}
+
+String Lib::input(String information)
+{
+    output(information);
+    String context;
+    cin>>context;
+    return context;
+}

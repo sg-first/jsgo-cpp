@@ -27,7 +27,8 @@ String preprocessor::prepro(String str,String &newcode)
             return "";
         }
         //没有问题，开始处理被require的代码文本
-        return preprocessor::PCodeFile(requireList[1]); //递归解析require的代码文本，直接返回解析后的结果
+        String path=aLib->GetPath(requireList[1]);
+        return preprocessor::PCodeFile(path); //递归解析require的代码文本，直接返回解析后的结果
     }
 
     if(str.indexOf("#define ")!=-1) //本句含有define语句
