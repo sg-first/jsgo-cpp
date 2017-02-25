@@ -20,15 +20,12 @@ public:
 const JSParStru _NULLJSParStru;
 
 
-class JS : public QObject
+class JS
 {
-    Q_OBJECT
 private:
     JSVM* AddJSVM(Lib *aLib);
 
 public:
-    JS(const JS&):QObject(0){}
-    JS(){}
     JS(Lib *aLib);
     JSVM* VM;
     Lib* aLib;

@@ -5,7 +5,7 @@ class preprocessor
 {
 public:
     static String PCodeFile(String codepath);
-    static String prepro(String str);
+    static String prepro(String str, String &newcode);
 
 private:
     static void deleteComment(String &str);

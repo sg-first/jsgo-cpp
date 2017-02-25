@@ -10,12 +10,12 @@ String preprocessor::PCodeFile(String codepath)
 
     for(String i:ary)
     {
-        newcode+=prepro(i)+"\r\n"; //一次处理一句
+        newcode+=prepro(i,newcode)+"\r\n"; //一次处理一句
     }
     return newcode;
 }
 
-String preprocessor::prepro(String str)
+String preprocessor::prepro(String str,String &newcode)
 {
     deleteComment(str);
     deleteSpace(str);
@@ -31,6 +31,21 @@ String preprocessor::prepro(String str)
         //没有问题，开始处理被require的代码文本
         return preprocessor::PCodeFile(requireList[1]); //递归解析require的代码文本，直接返回解析后的结果
     }
+
+    if(str.indexOf("#define ")!=-1) //本句含有define语句
+    {
+        QStringList defineList=str.split("#define ");
+        if(defineList[0]!="") //define前面没有任何字符，如果有就拒绝（看看这个分割一样不一样）
+        {
+            cout<<"Unrecognized #define statement"<<endl;
+            return "";
+        }
+        defineList=defineList[1].split(" ");
+        newcode.replace(defineList[0],defineList[1]);
+        return "";
+    }
+
+    return str; //什么都没有，原样返回
 }
 
 void findAndDelete(String &str,String findcontext,bool front=true)
