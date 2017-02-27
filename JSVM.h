@@ -4,7 +4,6 @@
 #include <QVector>
 #include "Lib.h"
 
-typedef QScriptEngine JSVM;
 typedef QVariant Variant;
 #define RegisterJSType(TypeName,JSName) qRegisterMetaType<TypeName>(JSName)
 
@@ -20,20 +19,21 @@ public:
 const JSParStru _NULLJSParStru;
 
 
-class JS
+class JSVM
 {
 private:
-    JSVM* AddJSVM(Lib *aLib);
+    QScriptEngine* AddQScriptEngine(Lib *aLib);
 
 public:
-    JS(Lib *aLib);
-    JSVM* VM;
+    JSVM(Lib *aLib);
+    QScriptEngine* VM;
     Lib* aLib;
 
     Variant JSEval(String code,String functionname=NULL_String,String *mistake=nullptr);
     void JSSendJSPar(JSParStru Parame);
     Variant JSEvalFile(String path,String functionname=NULL_String,String *mistake=nullptr);
     Variant JSCallFun(String functionname,String *mistake=nullptr);
-    void DeleteJSVM(JSVM *VM){delete VM;}
-
+    void DeleteQScriptEngine(QScriptEngine *VM){delete VM;}
+    template<typename T>
+    void JSSendPar(T *Parame,String ParameName);
 };

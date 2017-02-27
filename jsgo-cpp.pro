@@ -17,13 +17,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     Lib.cpp \
-    JS.cpp \
-    preprocessor.cpp
+    preprocessor.cpp \
+    JSVM.cpp
 
 HEADERS += \
     Lib.h \
-    JS.h \
-    preprocessor.h
+    preprocessor.h \
+    JSVM.h
 
 QMAKE_CXXFLAGS += -std=c++11
 QT += script

@@ -1,4 +1,4 @@
-#include "JS.h"
+#include "JSVM.h"
 
 //JSParStru
 void JSParStru::add(QObject *pointer,QString name)
@@ -14,22 +14,22 @@ bool JSParStru::operator !=(const JSParStru &par)
     return true;
 }
 
-//JS
-JS::JS(Lib *aLib)
+//JSVM
+JSVM::JSVM(Lib *aLib)
 {
-    VM=AddJSVM(aLib);
+    VM=AddQScriptEngine(aLib);
     this->aLib=aLib;
 }
 
-JSVM* JS::AddJSVM(Lib *aLib)
+QScriptEngine* JSVM::AddQScriptEngine(Lib *aLib)
 {
-    JSVM *VM=new JSVM;
+    QScriptEngine *VM=new QScriptEngine;
     QScriptValue qsLib=VM->newQObject(aLib);
     VM->globalObject().setProperty("lib",qsLib);
     return VM;
 }
 
-Variant JS::JSEval(String code,String functionname,String *mistake)
+Variant JSVM::JSEval(String code,String functionname,String *mistake)
 {
     QScriptValue ret;
     if(code!=NULL_String)
@@ -48,13 +48,15 @@ Variant JS::JSEval(String code,String functionname,String *mistake)
     return ret.toVariant();
 }
 
-/*void JS::JSSendPar(ParametersStru *Parame,String ParameName) //注意，使用指针仅因迫不得已，实际创建请不要new
+template<typename T>
+void JSVM::JSSendPar(T *Parame,String ParameName) //注意，使用指针仅因迫不得已，实际创建请不要new
 {
+    //T需要在registerType中注册
     QScriptValue para=VM->newQObject(Parame);
     VM->globalObject().setProperty(ParameName,para);
-}*/
+}
 
-void JS::JSSendJSPar(JSParStru Parame)
+void JSVM::JSSendJSPar(JSParStru Parame)
 {
     for(int i=0;i<Parame.pointerVec.length();i++)
     {
@@ -63,9 +65,9 @@ void JS::JSSendJSPar(JSParStru Parame)
     }
 }
 
-Variant JS::JSEvalFile(String path,String functionname,String *mistake)
+Variant JSVM::JSEvalFile(String path,String functionname,String *mistake)
 {return JSEval(aLib->ReadTXT(path),functionname,mistake);}
 
-Variant JS::JSCallFun(String functionname,String *mistake)
+Variant JSVM::JSCallFun(String functionname,String *mistake)
 {return JSEval(NULL_String,functionname,mistake);}
 

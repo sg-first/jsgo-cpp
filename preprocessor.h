@@ -1,10 +1,10 @@
 #pragma once
-#include "JS.h"
+#include "JSVM.h"
 
 class preprocessor
 {
 public:
-    static void run(String codepath,JS* VM);
+    static void run(String codepath,JSVM* VM);
     static String PCodeFile(String codepath);
     static String prepro(String str, String &newcode);
 

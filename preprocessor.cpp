@@ -1,6 +1,6 @@
 #include "preprocessor.h"
 
-void preprocessor::run(String codepath, JS *VM)
+void preprocessor::run(String codepath, JSVM *VM)
 {
     String code=preprocessor::PCodeFile(codepath);
     VM->JSEval(code);
