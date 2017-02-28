@@ -23,4 +23,5 @@ int main(int argc, char *argv[])
     {preprocessor::run(mainpath,&myjs);}
     else
     {myjs.JSEvalFile(mainpath);}
+    return a.exec();
 }
