@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE void output(String content,bool lineFeed=true);
     Q_INVOKABLE void exitPage();
     Q_INVOKABLE String input(String information);
+    Q_INVOKABLE void RemoveFile(String path);
 
 private:
     QTextStream cout;
