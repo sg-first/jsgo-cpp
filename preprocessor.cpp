@@ -19,6 +19,12 @@ String preprocessor::PCodeFile(String codepath)
     return newcode;
 }
 
+void exception(String error)
+{
+    aLib->output(error);
+    throw error;
+}
+
 String preprocessor::prepro(String str,String &newcode)
 {
     deleteComment(str);
@@ -27,10 +33,9 @@ String preprocessor::prepro(String str,String &newcode)
     if(str.indexOf("#require ")!=-1) //本句含有require语句
     {
         QStringList requireList=str.split("#require ");
-        if(requireList[0]!="") //require前面没有任何字符，如果有就拒绝（看看这个分割一样不一样）
+        if(requireList[0]!="") //require前面没有任何字符，如果有就拒绝
         {
-            aLib->output("Unrecognized #require statement");
-            return "";
+            exception("Unrecognized #require statement");
         }
         //没有问题，开始处理被require的代码文本
         String path=aLib->getPath(requireList[1]);
@@ -40,10 +45,9 @@ String preprocessor::prepro(String str,String &newcode)
     if(str.indexOf("#define ")!=-1) //本句含有define语句
     {
         QStringList defineList=str.split("#define ");
-        if(defineList[0]!="") //define前面没有任何字符，如果有就拒绝（看看这个分割一样不一样）
+        if(defineList[0]!="") //define前面没有任何字符，如果有就拒绝
         {
-            aLib->output("Unrecognized #define statement");
-            return "";
+            exception("Unrecognized #define statement");
         }
         defineList=defineList[1].split(" ");
         newcode.replace(defineList[0],defineList[1]);
