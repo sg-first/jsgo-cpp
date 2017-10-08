@@ -4,5 +4,5 @@ jsgo - cpp is a js native runtime power by C++. Its purpose is to provide a ligh
 
 Kit
 ----------
-* [jsgo lib](jsgo lib.md)
+* [jsgo lib](jsgo-lib.md)
 * jsgo preprocessor: Local file operation has been provided so jsgo-cpp only support `#define` `#require` preprocessing commands.
