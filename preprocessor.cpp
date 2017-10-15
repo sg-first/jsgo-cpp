@@ -35,7 +35,7 @@ String preprocessor::prepro(String str,String &newcode)
         QStringList requireList=str.split("#require ");
         if(requireList[0]!="") //require前面没有任何字符，如果有就拒绝
         {
-            exception("Unrecognized #require statement");
+            ::exception("Unrecognized #require statement");
         }
         //没有问题，开始处理被require的代码文本
         String path=aLib->getPath(requireList[1]);
@@ -47,7 +47,7 @@ String preprocessor::prepro(String str,String &newcode)
         QStringList defineList=str.split("#define ");
         if(defineList[0]!="") //define前面没有任何字符，如果有就拒绝
         {
-            exception("Unrecognized #define statement");
+            ::exception("Unrecognized #define statement");
         }
         defineList=defineList[1].split(" ");
         newcode.replace(defineList[0],defineList[1]);
