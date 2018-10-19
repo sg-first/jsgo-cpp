@@ -9,6 +9,8 @@ void preprocessor::run(String codepath, JSVM *VM)
 String preprocessor::PCodeFile(String codepath)
 {
     String code=aLib->ReadTXT(codepath);
+	deleteMulComment(code);
+    deleteSpace(code);
     String newcode="";
     QStringList ary=code.split("\r\n");
 
@@ -27,8 +29,7 @@ void exception(String error)
 
 String preprocessor::prepro(String str,String &newcode)
 {
-    deleteComment(str);
-    deleteSpace(str);
+	findAndDelete(str,"//"); //处理双斜杠注释
 
     if(str.indexOf("#require ")!=-1) //本句含有require语句
     {
@@ -76,23 +77,21 @@ void findAndDelete(String &str,String findcontext,bool front=true)
     }
 }
 
-void preprocessor::deleteComment(String &str)
+void preprocessor::deleteMulComment(String &str)
 {
-    findAndDelete(str,"//"); //处理双斜杠注释
-    //处理区段注释
     //准备工作
     const String CL="/*";
     const String CR="*/";
     //处理CL
     int posLeft=str.indexOf(CL);
     if(posLeft==-1) //没有注释
-    {return;}
-    String commentLight=str.right(str.length()-posLeft-CL.length());
+		return;
+    String commentLight=str.right(str.length()-posLeft-CL.length()); // /*之后的内容
     //处理CR
     int posRight=str.indexOf(CR);
     String str2=""; //注释结束后的字符
     if(posRight!=-1) //存在就有后边，否则就前边一段
-    {str2=commentLight.right(commentLight.length()-posRight-CR.length());}
+		str2=commentLight.right(commentLight.length()-posRight-CR.length()); // */之后的内容
     //处理完成，最后拼接
     str=str.left(posLeft); //注释结束前的字符
     str+=str2; //前后拼装
